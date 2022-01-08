@@ -9,12 +9,13 @@
     ".prettierrc.json",
     ".editorconfig",
     ".gitattributes",
-    "bin"
+    "bin",
+    ".husky/*"
   ],
   "bin": {
-    "run-e": "./bin/run_e.js",
-    "run-ci": "./bin/run_ci.js",
-    "run-local": "./bin/run_local.js"
+    "run-e": "bin/run_e.js",
+    "run-ci": "bin/run_ci.js",
+    "run-local": "bin/run_local.js"
   },
   "scripts": {
     "test": "run-s format test:dev",
@@ -30,17 +31,12 @@
     "test:ci": "run-s test:ci:*",
     "test:dev:ava": "ava",
     "test:ci:ava": "nyc -r lcovonly -r text -r json ava",
-    "prepublishOnly": "npm ci && npm test"
+    "prepublishOnly": "npm ci && npm test",
+    "prepare": "husky install"
   },
   "config": {
     "eslint": "--ignore-path .gitignore --cache --format=codeframe --max-warnings=0 \"{bin,.github}/**/*.{js,html}\" \".*.js\"",
     "prettier": "--ignore-path .gitignore --loglevel=warn \"{bin,.github}/**/*.{js,md,yml,json,html}\" \"*.{js,yml,json,html}\" \"!**/package-lock.json\" \"!CHANGELOG.md\""
-  },
-  "husky": {
-    "hooks": {
-      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS",
-      "pre-push": "npm run format"
-    }
   },
   "description": "ESLint and Prettier configuration for Netlify Node.js projects",
   "keywords": [
@@ -62,10 +58,14 @@
     "fp"
   ],
   "license": "Apache-2.0",
-  "repository": "netlify/eslint-config-node",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/netlify/eslint-config-node.git"
+  },
   "bugs": {
     "url": "https://github.com/netlify/node-eslint-config/issues"
   },
+  "homepage": "https://github.com/netlify/eslint-config-node#readme",
   "author": "Netlify Inc.",
   "directories": {
     "test": "test"
@@ -96,7 +96,7 @@
     "eslint-plugin-unicorn": "^39.0.0",
     "eslint-plugin-you-dont-need-lodash-underscore": "^6.10.0",
     "execa": "^5.0.0",
-    "husky": "^4.3.0",
+    "husky": "^7.0.4",
     "is-ci": "^3.0.0",
     "npm-run-all": "^4.1.5",
     "prettier": "^2.1.2",
